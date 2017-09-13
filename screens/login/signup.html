@@ -1,0 +1,73 @@
+<div id="signup-box" class="signup-box visible widget-box no-border">
+	<div class="widget-body">
+		<div class="widget-main">
+			<h4 class="header green lighter bigger">
+				<i class="icon-group blue"></i>
+				{{ 'USER_REG' | xlat }}
+			</h4>
+
+			<div class="space-6"></div>
+			<p> {{ 'ENTER_DET' | xlat }} </p>
+
+			<form />
+				<fieldset>
+					<label>
+						<span class="block input-icon input-icon-right">
+							<input type="email" class="span12" placeholder="{{ 'E_MAIL' | xlat }}" />
+							<i class="icon-envelope"></i>
+						</span>
+					</label>
+
+					<label>
+						<span class="block input-icon input-icon-right">
+							<input type="text" class="span12" placeholder="{{ 'USER_NAME' | xlat }}" />
+							<i class="icon-user"></i>
+						</span>
+					</label>
+
+					<label>
+						<span class="block input-icon input-icon-right">
+							<input type="password" class="span12" placeholder="{{ 'USER_PASSWORD' | xlat }}" />
+							<i class="icon-lock"></i>
+						</span>
+					</label>
+
+					<label>
+						<span class="block input-icon input-icon-right">
+							<input type="password" class="span12" placeholder="{{ 'RE_PASS' | xlat }}" />
+							<i class="icon-retweet"></i>
+						</span>
+					</label>
+
+					<label>
+						<input type="checkbox" />
+						<span class="lbl">
+							<a href="#">{{ 'ACCEPT' | xlat }}</a>
+						</span>
+					</label>
+
+					<div class="space-24"></div>
+
+					<div class="clearfix">
+						<button type="reset" class="width-30 pull-left btn btn-small">
+							<i class="icon-refresh"></i>
+							{{ 'RESET' | xlat }}
+						</button>
+
+						<button onclick="return false;" class="width-65 pull-right btn btn-small btn-success">
+							{{ 'REG_BTN' | xlat }}
+							<i class="icon-arrow-right icon-on-right"></i>
+						</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+
+		<div class="toolbar center">
+			<a href="#!login" class="back-to-login-link">
+				<i class="icon-arrow-left"></i>
+				{{ 'LOGIN_RET' | xlat }}
+			</a>
+		</div>
+	</div><!--/widget-body-->
+</div><!--/signup-box-->
