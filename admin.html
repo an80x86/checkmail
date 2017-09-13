@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp" ng-controller="myAdmin">
 	<head>
 		<meta charset="utf-8" />
-		<title>Vim Admin v1.0</title>
+		<title>{{ 'TITLE_TAG' | xlat }}</title>
 
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -186,244 +186,14 @@
 			</a>
 
 			<div class="sidebar" id="sidebar">
-
 				<ul class="nav nav-list">
-					<li>
-						<a href="index.html">
-							<i class="icon-dashboard"></i>
-							<span class="menu-text"> Dashboard </span>
+					<li ng-repeat="opt4 in menus_list">
+						<a href="{{opt4.link}}">
+							<i class="{{opt4.clsname}}"></i>
+							<span class="menu-text">{{opt4.txt}}</span>
 						</a>
 					</li>
 
-					<li>
-						<a href="typography.html">
-							<i class="icon-text-width"></i>
-							<span class="menu-text"> Typography </span>
-						</a>
-					</li>
-
-					<li>
-						<a href="#" class="dropdown-toggle">
-							<i class="icon-desktop"></i>
-							<span class="menu-text"> UI Elements </span>
-
-							<b class="arrow icon-angle-down"></b>
-						</a>
-
-						<ul class="submenu">
-							<li>
-								<a href="elements.html">
-									<i class="icon-double-angle-right"></i>
-									Elements
-								</a>
-							</li>
-
-							<li>
-								<a href="buttons.html">
-									<i class="icon-double-angle-right"></i>
-									Buttons &amp; Icons
-								</a>
-							</li>
-
-							<li>
-								<a href="treeview.html">
-									<i class="icon-double-angle-right"></i>
-									Treeview
-								</a>
-							</li>
-
-							<li>
-								<a href="#" class="dropdown-toggle">
-									<i class="icon-double-angle-right"></i>
-
-									Three Level Menu
-									<b class="arrow icon-angle-down"></b>
-								</a>
-
-								<ul class="submenu">
-									<li>
-										<a href="#">
-											<i class="icon-leaf"></i>
-											Item #1
-										</a>
-									</li>
-
-									<li>
-										<a href="#" class="dropdown-toggle">
-											<i class="icon-pencil"></i>
-
-											4th level
-											<b class="arrow icon-angle-down"></b>
-										</a>
-
-										<ul class="submenu">
-											<li>
-												<a href="#">
-													<i class="icon-plus"></i>
-													Add Product
-												</a>
-											</li>
-
-											<li>
-												<a href="#">
-													<i class="icon-eye-open"></i>
-													View Products
-												</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-
-					<li>
-						<a href="tables.html">
-							<i class="icon-list"></i>
-							<span class="menu-text"> Tables </span>
-						</a>
-					</li>
-
-					<li>
-						<a href="#" class="dropdown-toggle">
-							<i class="icon-edit"></i>
-							<span class="menu-text"> Forms </span>
-
-							<b class="arrow icon-angle-down"></b>
-						</a>
-
-						<ul class="submenu">
-							<li>
-								<a href="form-elements.html">
-									<i class="icon-double-angle-right"></i>
-									Form Elements
-								</a>
-							</li>
-
-							<li>
-								<a href="form-wizard.html">
-									<i class="icon-double-angle-right"></i>
-									Wizard &amp; Validation
-								</a>
-							</li>
-
-							<li>
-								<a href="wysiwyg.html">
-									<i class="icon-double-angle-right"></i>
-									Wysiwyg &amp; Markdown
-								</a>
-							</li>
-						</ul>
-					</li>
-
-					<li>
-						<a href="widgets.html">
-							<i class="icon-list-alt"></i>
-							<span class="menu-text"> Widgets </span>
-						</a>
-					</li>
-
-					<li>
-						<a href="calendar.html">
-							<i class="icon-calendar"></i>
-
-							<span class="menu-text">
-								Calendar
-								<span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
-									<i class="icon-warning-sign red bigger-130"></i>
-								</span>
-							</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="gallery.html">
-							<i class="icon-picture"></i>
-							<span class="menu-text"> Gallery </span>
-						</a>
-					</li>
-
-					<li>
-						<a href="#" class="dropdown-toggle">
-							<i class="icon-tag"></i>
-							<span class="menu-text"> More Pages </span>
-
-							<b class="arrow icon-angle-down"></b>
-						</a>
-
-						<ul class="submenu">
-							<li>
-								<a href="profile.html">
-									<i class="icon-double-angle-right"></i>
-									User Profile
-								</a>
-							</li>
-
-							<li>
-								<a href="pricing.html">
-									<i class="icon-double-angle-right"></i>
-									Pricing Tables
-								</a>
-							</li>
-
-							<li>
-								<a href="invoice.html">
-									<i class="icon-double-angle-right"></i>
-									Invoice
-								</a>
-							</li>
-
-							<li>
-								<a href="login.html">
-									<i class="icon-double-angle-right"></i>
-									Login &amp; Register
-								</a>
-							</li>
-						</ul>
-					</li>
-
-					<li class="active open">
-						<a href="#" class="dropdown-toggle">
-							<i class="icon-file-alt"></i>
-
-							<span class="menu-text">
-								Other Pages
-								<span class="badge badge-primary ">4</span>
-							</span>
-
-							<b class="arrow icon-angle-down"></b>
-						</a>
-
-						<ul class="submenu">
-							<li>
-								<a href="error-404.html">
-									<i class="icon-double-angle-right"></i>
-									Error 404
-								</a>
-							</li>
-
-							<li>
-								<a href="error-500.html">
-									<i class="icon-double-angle-right"></i>
-									Error 500
-								</a>
-							</li>
-
-							<li>
-								<a href="grid.html">
-									<i class="icon-double-angle-right"></i>
-									Grid
-								</a>
-							</li>
-
-							<li class="active">
-								<a href="blank.html">
-									<i class="icon-double-angle-right"></i>
-									Blank Page
-								</a>
-							</li>
-						</ul>
-					</li>
 				</ul><!--/.nav-list-->
 
 				<div class="sidebar-collapse" id="sidebar-collapse">
@@ -435,8 +205,7 @@
 				<div class="breadcrumbs" id="breadcrumbs">
 					<ul class="breadcrumb">
 						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">Home</a>
+							<a href="#">{{CurrentPageTitle}}</a>
 						</li>
 					</ul><!--.breadcrumb-->
 
@@ -565,7 +334,7 @@
 
 				// notifications
 				$scope.notifications_list = [
-					{ msg: 'bakkal listesi işlenmesi bitti', read:false}
+					{ msg: 'gim listesi işlenmesi bitti', read:false}
    			];
 				$scope.notifications = $scope.nmLength($scope.notifications_list);
 				$scope.notifications_all = $scope.notifications_list.length;
@@ -573,14 +342,24 @@
 				// messages
 				$scope.messages_list = [
 					{ frm:'admin', msg: 'merhaba, sistemimize hoş geldiniz.', time:'10.09.2017 10:00', read:true},
-					{ frm:'admin', msg: 'bakkal toplu mail listesi temizlenmiştir.', time:'13.09.2017 22:00', read:false},
+					{ frm:'admin', msg: 'gim toplu mail listesi temizlenmiştir.', time:'13.09.2017 22:00', read:false},
    			];
 				$scope.messages = $scope.nmLength($scope.messages_list);
 				$scope.messages_all = $scope.messages_list.length;
 
+				// menus
+				$scope.menus_list = [
+					{link: '#!', clsname: 'icon-dashboard', txt: 'Gösterge Paneli'},
+					{link: '#!', clsname: 'icon-tasks', txt: 'Görevler'},
+					{link: '#!', clsname: 'icon-bell-alt', txt: 'Bildirimler'},
+					{link: '#!', clsname: 'icon-envelope', txt: 'Mesajlar'},
+					{link: '#!checkmail', clsname: 'icon-edit', txt: 'Mail Doğrulama'},
+					{link: '#!bulkcheckmail', clsname: 'icon-list-alt', txt: 'Çoklu Mail Doğrulama'},
+					{link: '/logout.html', clsname: 'icon-off', txt: 'Çıkış'},
+				];
+
 				$scope.User = localStorage.userName;
-				$scope.CurrentPageTitle = '';
-				$scope.CurrentPageAddr = '/';
+				$scope.CurrentPageTitle = 'Gösterge Paneli';
 				$scope.setCurrentLanguage('tr');
 			}
 

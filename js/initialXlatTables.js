@@ -32,6 +32,7 @@ var initialXlatTables = {
 		'MESSAGE_TITLE': 'Messages',
 		'MESSAGE_DETAILS': 'See all messages',
 		'DASHBOARD': 'Dashboard',
+		'LOGIN_ERROR': 'User or password is incorrect!',
 
 		'USER_REG' : 'New User Registration',
 		'ENTER_DET' : 'Enter Your Details To Begin:',
@@ -76,6 +77,7 @@ var initialXlatTables = {
 		'MESSAGE_TITLE': 'Mesajlar',
 		'MESSAGE_DETAILS': 'Mesaj Detaylarına Bak',
 		'DASHBOARD':'Gösterge Paneli',
+		'LOGIN_ERROR': 'Kullanıcı veya şifre hatalı!',
 
 		'RET_PASS' : 'Parola Al',
 		'ENT_EMAIL' : 'Talimatları Almak İçin E-postanızı Girin',
