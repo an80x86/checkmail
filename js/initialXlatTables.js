@@ -2,6 +2,13 @@ var initialXlatTables = {
 	'en': {
 		'TURKCE': 'Turkish (Türkçe)',
 		'ENGLISH': 'English (İngilizce)',
+
+		'TITLE_TAG': 'checkmail.co',
+		'CONTENT_TAG': 'User login page',
+		'COMPANY_TAG': 'CheckMail.Co Admin',
+		'VERSION_TAG': 'v1.0',
+		'COPYRIGHT_TAG': 'CheckMail, Inc. 2017',
+
 		'LOGIN_TITLE' : 'Please Enter Your Information',
 		'USER_NAME' : 'Username',
 		'USER_PASSWORD' : 'Password',
@@ -15,6 +22,9 @@ var initialXlatTables = {
 		'E_MAIL' : 'EMail',
 		'SEND' : 'Send Me',
 		'LOGIN_RET' : 'Back to login',
+
+		'WELCOME': 'Welcome',
+		'LOGOUT': 'Logout',
 
 		'USER_REG' : 'New User Registration',
 		'ENTER_DET' : 'Enter Your Details To Begin:',
@@ -35,6 +45,13 @@ var initialXlatTables = {
 	'tr': {
 		'TURKCE': 'Turkish (Türkçe)',
 		'ENGLISH': 'English (İngilizce)',
+
+		'TITLE_TAG': 'checkmail.co',
+		'CONTENT_TAG': 'Kullanıcı Bilgileri',
+		'COMPANY_TAG': 'CheckMail.Co Yönetim Paneli',
+		'VERSION_TAG': 'v1.0',
+		'COPYRIGHT_TAG': 'CheckMail, Inc. 2017',
+
 		'LOGIN_TITLE' : 'Lütfen Bilgilerinizi Giriniz',
 		'USER_NAME' : 'Kullanıcı Adı',
 		'USER_PASSWORD' : 'Şifre',
@@ -42,6 +59,9 @@ var initialXlatTables = {
 		'LOGIN' : 'Giriş',
 		'FORGOT' : 'Şifremi Unuttum',
 		'REGISTER' : 'Kayıt Ol',
+
+		'WELCOME': 'Merhaba',
+		'LOGOUT': 'Çıkış',
 
 		'RET_PASS' : 'Parola Al',
 		'ENT_EMAIL' : 'Talimatları Almak İçin E-postanızı Girin',

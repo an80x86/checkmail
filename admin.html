@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp" ng-controller="myAdmin">
 	<head>
 		<meta charset="utf-8" />
 		<title>Vim Admin v1.0</title>
@@ -48,6 +48,7 @@
 					</a><!--/.brand-->
 
 					<ul class="nav ace-nav pull-right">
+
 						<li class="grey"><!-- task -->
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="icon-tasks"></i>
@@ -261,38 +262,24 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
+									<small>{{ 'WELCOME' | xlat }},</small>
+									{{User}}
 								</span>
 
 								<i class="icon-caret-down"></i>
 							</a>
 
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
-								<li>
-									<a href="#">
-										<i class="icon-cog"></i>
-										Settings
-									</a>
-								</li>
 
 								<li>
-									<a href="#">
-										<i class="icon-user"></i>
-										Profile
-									</a>
-								</li>
-
-								<li class="divider"></li>
-
-								<li>
-									<a href="#">
+									<a href="logout.html">
 										<i class="icon-off"></i>
-										Logout
+										{{ 'LOGOUT' | xlat }}
 									</a>
 								</li>
 							</ul>
 						</li>
+
 					</ul><!--/.ace-nav-->
 				</div><!--/.container-fluid-->
 			</div><!--/.navbar-inner-->
@@ -571,21 +558,13 @@
 						<li class="active">Blank Page</li>
 					</ul><!--.breadcrumb-->
 
-					<div class="nav-search" id="nav-search">
-						<form class="form-search" />
-							<span class="input-icon">
-								<input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
-								<i class="icon-search nav-search-icon"></i>
-							</span>
-						</form>
-					</div><!--#nav-search-->
 				</div>
 
 				<div class="page-content">
 					<div class="row-fluid">
 						<div class="span12">
 							<!--PAGE CONTENT BEGINS-->
-
+							<div ng-view></div>
 							<!--PAGE CONTENT ENDS-->
 						</div><!--/.span-->
 					</div><!--/.row-fluid-->
@@ -638,19 +617,18 @@
     <!-- angularjs -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-    <script src="js/ngStorage.min.js"></script>
     <script src="js/initialXlatTables.js"></script>
     <script src="js/xlat.js"></script>
 
 		<!--inline scripts related to this page-->
 		<script>
-			var app = angular.module("myApp", ["ngRoute","xlat","ngStorage"]);
+			var app = angular.module("myApp", ["ngRoute","xlat"]);
 
 			app.config(function($routeProvider) {
 			    $routeProvider
 			    .when("/", {
-			        templateUrl : "/screens/login/admin.html",
-							controller : "loginCtrl"
+			        templateUrl : "/screens/admin/dashboard.html",
+							controller : "DashboardCtrl"
 			    });
 			});
 
@@ -659,33 +637,25 @@
 					xlatService.setCurrentLanguage(language);
 				};
 
+				if (!localStorage.userName) {
+						window.location.href = 'index.html';
+						return;
+				}
+
+				$scope.User = localStorage.userName;
 				$scope.setCurrentLanguage('tr');
 			}
 
-			app.controller("loginCtrl", ['$scope', 'xlatService', '$localStorage', function ($scope, xlatService, $localStorage) {
-				$scope.Register = function() {
-					if ($scope.userName == "admin" && $scope.userPassword == "1") {
-						$scope.setUser($scope.userName);
-						window.location.href = 'admin.html';
-					} else {
-						alert("Kullanıcı adı ve şifre hatalı, kontrol edip tekrar deneyiniz.");
-						$scope.userPassword = '';
-					}
-				};
+			app.controller("myAdmin", ['$scope', 'xlatService',
+				function ($scope, xlatService) {
 
-				$scope.setUser = function(val) {
-					$scope.$storage = $localStorage.$default({
-						user: val
-					});
-				}
+					defaultListController($scope, xlatService);
+			}]);
 
-				$scope.getUser = function() {
-					return $localStorage.user;
-				}
+			app.controller("DashboardCtrl", ['$scope', 'xlatService',
+				function ($scope, xlatService) {
 
 				//alert($scope.getUser());
-				$scope.userName = "";
-				$scope.userPassword = "";
 				defaultListController($scope, xlatService);
 			}]);
 			</script>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp" ng-controller="myLogin">
 	<head>
 		<meta charset="utf-8" />
-		<title>checkmail.co</title>
+		<title>{{ 'TITLE_TAG' | xlat }}</title>
 
-		<meta name="description" content="User login page" />
+		<meta name="description" content="{{ 'CONTENT_TAG' | xlat }}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!--basic styles-->
@@ -36,7 +36,7 @@
 		<!--inline styles related to this page-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 
-	<body ng-app="myApp" class="login-layout">
+	<body class="login-layout">
 		<div class="main-container container-fluid">
 			<div class="main-content">
 				<div class="row-fluid">
@@ -46,10 +46,10 @@
 								<div class="center">
 									<h1>
 										<i class="icon-leaf green"></i>
-										<span class="red">CheckMail.Co Admin</span>
-										<span class="white">v1.0</span>
+										<span class="red">{{ 'COMPANY_TAG' | xlat }}</span>
+										<span class="white">{{ 'VERSION_TAG' | xlat }}</span>
 									</h1>
-									<h4 class="blue">&copy; CheckMail.Co 2017</h4>
+									<h4 class="blue">&copy; {{ 'COPYRIGHT_TAG' | xlat }}</h4>
 								</div>
 							</div>
 
@@ -109,7 +109,6 @@
 		<!-- angularjs -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-		<script src="js/ngStorage.min.js"></script>
 		<script src="js/initialXlatTables.js"></script>
 		<script src="js/xlat.js"></script>
 
@@ -123,8 +122,7 @@
 		</script>
 
 		<script>
-			var app = angular.module("myApp", ["ngRoute","xlat","ngStorage"]);
-
+			var app = angular.module("myApp", ["ngRoute","xlat"]);
 			app.config(function($routeProvider) {
 			    $routeProvider
 			    .when("/", {
@@ -153,37 +151,38 @@
 				$scope.setCurrentLanguage('tr');
 			}
 
-			app.controller("loginCtrl", ['$scope', 'xlatService', '$localStorage', function ($scope, xlatService, $localStorage) {
+			app.controller("myLogin", ['$scope', 'xlatService',
+				function ($scope, xlatService) {
+
+					defaultListController($scope, xlatService);
+			}]);
+
+			app.controller("loginCtrl", ['$scope', 'xlatService',
+				function ($scope, xlatService) {
 				$scope.Register = function() {
 					if ($scope.userName == "admin" && $scope.userPassword == "1") {
-						$scope.setUser($scope.userName);
+						localStorage.userName = $scope.userName;
 						window.location.href = 'admin.html';
 					} else {
 						alert("Kullanıcı adı ve şifre hatalı, kontrol edip tekrar deneyiniz.");
+						if (localStorage.userName) {
+						    localStorage.removeItem("userName");
+						}
 						$scope.userPassword = '';
 					}
 				};
 
-				$scope.setUser = function(val) {
-					$scope.$storage = $localStorage.$default({
-						user: val
-					});
-				}
-
-				$scope.getUser = function() {
-					return $localStorage.user;
-				}
-
-				//alert($scope.getUser());
 				$scope.userName = "";
 				$scope.userPassword = "";
 				defaultListController($scope, xlatService);
 			}]);
-			app.controller("forgotCtrl", ['$scope', 'xlatService', '$localStorage', function ($scope, xlatService, $localStorage) {
+			app.controller("forgotCtrl", ['$scope', 'xlatService',
+				function ($scope, xlatService) {
 
 				defaultListController($scope, xlatService);
 			}]);
-			app.controller("signupCtrl", ['$scope', 'xlatService', '$localStorage', function ($scope, xlatService, $localStorage) {
+			app.controller("signupCtrl", ['$scope', 'xlatService',
+				function ($scope, xlatService) {
 
 					defaultListController($scope, xlatService);
 			}]);
