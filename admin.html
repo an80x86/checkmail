@@ -43,7 +43,7 @@
 					<a href="#" class="brand">
 						<small>
 							<i class="icon-leaf"></i>
-							Ace Admin
+							{{ 'COMPANY_TAG' | xlat }}
 						</small>
 					</a><!--/.brand-->
 
@@ -52,70 +52,31 @@
 						<li class="grey"><!-- task -->
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="icon-tasks"></i>
-								<span class="badge badge-grey">4</span>
+								<span class="badge badge-grey">{{tasks}}</span>
 							</a>
 
 							<ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
 								<li class="nav-header">
 									<i class="icon-ok"></i>
-									4 Tasks to complete
+									{{ 'TASK_TITLE' | xlat }}
 								</li>
 
-								<li>
+								<li ng-repeat="opt in tasks_list" ng-if="opt.val < 100">
 									<a href="#">
 										<div class="clearfix">
-											<span class="pull-left">Software Update</span>
-											<span class="pull-right">65%</span>
+											<span class="pull-left">{{opt.name}}</span>
+											<span class="pull-right">{{opt.val}}%</span>
 										</div>
 
-										<div class="progress progress-mini ">
-											<div style="width:65%" class="bar"></div>
+										<div class="progress progress-mini {{progresSts(opt.val)}}">
+											<div style="width:{{opt.val}}%" class="bar"></div>
 										</div>
 									</a>
 								</li>
 
 								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">Hardware Upgrade</span>
-											<span class="pull-right">35%</span>
-										</div>
-
-										<div class="progress progress-mini progress-danger">
-											<div style="width:35%" class="bar"></div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">Unit Testing</span>
-											<span class="pull-right">15%</span>
-										</div>
-
-										<div class="progress progress-mini progress-warning">
-											<div style="width:15%" class="bar"></div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">Bug Fixes</span>
-											<span class="pull-right">90%</span>
-										</div>
-
-										<div class="progress progress-mini progress-success progress-striped active">
-											<div style="width:90%" class="bar"></div>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										See tasks with details
+									<a href="#" ng-if="tasks_all>0">
+										{{ 'TASK_DETAILS' | xlat }} ({{tasks_all}})
 										<i class="icon-arrow-right"></i>
 									</a>
 								</li>
@@ -125,61 +86,29 @@
 						<li class="purple"><!-- notification -->
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="icon-bell-alt icon-animated-bell"></i>
-								<span class="badge badge-important">8</span>
+								<span class="badge badge-important">{{notifications}}</span>
 							</a>
 
 							<ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-closer">
 								<li class="nav-header">
 									<i class="icon-warning-sign"></i>
-									8 Notifications
+									{{ 'NOTIFICATION_TITLE' | xlat }}
 								</li>
 
-								<li>
+								<li ng-repeat="opt2 in notifications_list" ng-if="opt2.read === false">
 									<a href="#">
 										<div class="clearfix">
 											<span class="pull-left">
 												<i class="btn btn-mini no-hover btn-pink icon-comment"></i>
-												New Comments
+												{{opt2.msg}}
 											</span>
-											<span class="pull-right badge badge-info">+12</span>
 										</div>
 									</a>
 								</li>
 
 								<li>
 									<a href="#">
-										<i class="btn btn-mini btn-primary icon-user"></i>
-										Bob just signed up as an editor ...
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">
-												<i class="btn btn-mini no-hover btn-success icon-shopping-cart"></i>
-												New Orders
-											</span>
-											<span class="pull-right badge badge-success">+8</span>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="clearfix">
-											<span class="pull-left">
-												<i class="btn btn-mini no-hover btn-info icon-twitter"></i>
-												Followers
-											</span>
-											<span class="pull-right badge badge-info">+11</span>
-										</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										See all notifications
+										{{ 'NOTIFICATION_DETAILS' | xlat }} ({{notifications_all}})
 										<i class="icon-arrow-right"></i>
 									</a>
 								</li>
@@ -189,27 +118,27 @@
 						<li class="green"><!-- message -->
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="icon-envelope icon-animated-vertical"></i>
-								<span class="badge badge-success">5</span>
+								<span class="badge badge-success">{{messages}}</span>
 							</a>
 
 							<ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
 								<li class="nav-header">
 									<i class="icon-envelope-alt"></i>
-									5 Messages
+									{{ 'MESSAGE_TITLE' | xlat }}
 								</li>
 
-								<li>
+								<li ng-repeat="opt3 in messages_list" ng-if="opt3.read === false">
 									<a href="#">
-										<img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+										<img src="assets/avatars/avatar.png" class="msg-photo" alt="avatar" />
 										<span class="msg-body">
 											<span class="msg-title">
-												<span class="blue">Alex:</span>
-												Ciao sociis natoque penatibus et auctor ...
+												<span class="blue">{{opt3.frm}}:</span>
+												{{opt3.msg}}
 											</span>
 
 											<span class="msg-time">
 												<i class="icon-time"></i>
-												<span>a moment ago</span>
+												<span>{{opt3.time}}</span>
 											</span>
 										</span>
 									</a>
@@ -217,41 +146,7 @@
 
 								<li>
 									<a href="#">
-										<img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
-										<span class="msg-body">
-											<span class="msg-title">
-												<span class="blue">Susan:</span>
-												Vestibulum id ligula porta felis euismod ...
-											</span>
-
-											<span class="msg-time">
-												<i class="icon-time"></i>
-												<span>20 minutes ago</span>
-											</span>
-										</span>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
-										<span class="msg-body">
-											<span class="msg-title">
-												<span class="blue">Bob:</span>
-												Nullam quis risus eget urna mollis ornare ...
-											</span>
-
-											<span class="msg-time">
-												<i class="icon-time"></i>
-												<span>3:15 pm</span>
-											</span>
-										</span>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										See all messages
+										{{ 'MESSAGE_DETAILS' | xlat }} ({{messages_all}})
 										<i class="icon-arrow-right"></i>
 									</a>
 								</li>
@@ -637,11 +532,66 @@
 					xlatService.setCurrentLanguage(language);
 				};
 
+				$scope.progresSts = function (sts) {
+					if (sts <= 25) return 'progress-striped active';
+					if (sts >= 26 && sts <= 50) return 'progress-danger progress-striped active';
+					if (sts >= 51 && sts <= 75) return 'progress-warning progress-striped active';
+					if (sts >= 76 && sts <= 99) return 'progress-success progress-striped active';
+					if (sts >= 100) return 'progress-success';
+
+					return 'progress-danger';
+				}
+
+				$scope.taskLength = function(obj) {
+					var i = 0;
+					obj.forEach(function(element) {
+    				if (element.val<100) i++;
+					});
+
+					return i;
+				}
+
+				$scope.nmLength = function(obj) {
+					var i = 0;
+					obj.forEach(function(element) {
+    				if (element.read === false) i++;
+					});
+
+					return i;
+				}
+
 				if (!localStorage.userName) {
 						window.location.href = 'index.html';
 						return;
 				}
 
+				// tasks
+				$scope.tasks_list = [
+					{ name: 'migros', val:1 },
+					{ name: 'sok', val:30 },
+					{ name: 'bim', val:60 },
+					{ name: '101', val:95 },
+					{ name: 'gim', val:100 }
+   			];
+				$scope.tasks = $scope.taskLength($scope.tasks_list);
+				$scope.tasks_all = $scope.tasks_list.length;
+
+				// notifications
+				$scope.notifications_list = [
+					{ msg: 'bakkal listesi işlenmesi bitti', read:false}
+   			];
+				$scope.notifications = $scope.nmLength($scope.notifications_list);
+				$scope.notifications_all = $scope.notifications_list.length;
+
+				// messages
+				$scope.messages_list = [
+					{ frm:'admin', msg: 'merhaba, sistemimize hoş geldiniz.', time:'10.09.2017 10:00', read:true},
+					{ frm:'admin', msg: 'bakkal toplu mail listesi temizlenmiştir.', time:'13.09.2017 22:00', read:false},
+   			];
+				$scope.messages = $scope.nmLength($scope.messages_list);
+				$scope.messages_all = $scope.messages_list.length;
+
+				$scope.deger = 100;
 				$scope.User = localStorage.userName;
 				$scope.setCurrentLanguage('tr');
 			}

@@ -25,6 +25,13 @@ var initialXlatTables = {
 
 		'WELCOME': 'Welcome',
 		'LOGOUT': 'Logout',
+		'TASK_DETAILS': 'See tasks with details',
+		'TASK_TITLE': 'Tasks',
+		'NOTIFICATION_TITLE': 'Notifications',
+		'NOTIFICATION_DETAILS': 'See all notifications',
+		'MESSAGE_TITLE': 'Messages',
+		'MESSAGE_DETAILS': 'See all messages',
+		'DASHBOARD': 'Dashboard',
 
 		'USER_REG' : 'New User Registration',
 		'ENTER_DET' : 'Enter Your Details To Begin:',
@@ -62,6 +69,13 @@ var initialXlatTables = {
 
 		'WELCOME': 'Merhaba',
 		'LOGOUT': 'Çıkış',
+		'TASK_DETAILS': 'Görev Detaylarına Bak',
+		'TASK_TITLE': 'Görevler',
+		'NOTIFICATION_TITLE': 'Bildirimler',
+		'NOTIFICATION_DETAILS': 'Bildirim Detaylarına Bak',
+		'MESSAGE_TITLE': 'Mesajlar',
+		'MESSAGE_DETAILS': 'Mesaj Detaylarına Bak',
+		'DASHBOARD':'Gösterge Paneli',
 
 		'RET_PASS' : 'Parola Al',
 		'ENT_EMAIL' : 'Talimatları Almak İçin E-postanızı Girin',
