@@ -212,13 +212,10 @@
 				</div>
 
 				<div class="page-content">
-					<div class="row-fluid">
-						<div class="span12">
-							<!--PAGE CONTENT BEGINS-->
-							<div ng-view></div>
-							<!--PAGE CONTENT ENDS-->
-						</div><!--/.span-->
-					</div><!--/.row-fluid-->
+					<!--PAGE CONTENT BEGINS-->
+					<div ng-view></div>
+					<!--PAGE CONTENT ENDS-->
+
 				</div><!--/.page-content-->
 
 			</div><!--/.main-content-->
@@ -280,7 +277,11 @@
 			    .when("/", {
 			        templateUrl : "/screens/admin/dashboard.html",
 							controller : "DashboardCtrl"
-			    });
+			    })
+					.when("/checkmail", {
+							templateUrl : "/screens/admin/checkmail.html",
+							controller : "CheckmailCtrl"
+					});
 			});
 
 			var defaultListController = function ($scope, xlatService) {
@@ -375,6 +376,39 @@
 				//alert($scope.getUser());
 				defaultListController($scope, xlatService);
 			}]);
+			app.controller("CheckmailCtrl", ['$scope', 'xlatService',
+				function ($scope, xlatService) {
+
+				$scope.gizle = function() {
+					$scope.alert = false;
+				}
+
+				$scope.goster = function() {
+					$scope.alert = true;
+				}
+
+				$scope.Check = function() {
+					if ($scope.email == 'a@a.com') {
+						$scope.alertclass = 'alert-success';
+						var msg = xlatService.xlat('EMAIL_OK', null);
+						$scope.alerticon = 'icon-ok';
+						$scope.result = msg;
+					} else {
+						$scope.alertclass = 'alert-danger';
+						var msg = xlatService.xlat('EMAIL_ERR', null);
+						$scope.alerticon = 'icon-trash';
+						$scope.result = msg;
+					}
+					$scope.goster();
+				}
+
+				$scope.result = '';
+				$scope.alert = false;
+				$scope.alertclass = 'alert-success';
+				$scope.alerticon = 'icon-trash';
+				defaultListController($scope, xlatService);
+			}]);
+
 			</script>
 
 	</body>

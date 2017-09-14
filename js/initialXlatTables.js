@@ -33,6 +33,11 @@ var initialXlatTables = {
 		'MESSAGE_DETAILS': 'See all messages',
 		'DASHBOARD': 'Dashboard',
 		'LOGIN_ERROR': 'User or password is incorrect!',
+		'CHECKBYONE_TITLE' : 'Email Verification One by One',
+		'EMAIL_TITLE1': 'Check E-mail Address',
+		'EMAIL_ENTER': 'Enter Email Address',
+		'EMAIL_OK': 'Mail address verified.',
+		'EMAIL_ERR': 'Mail address not verified!',
 
 		'USER_REG' : 'New User Registration',
 		'ENTER_DET' : 'Enter Your Details To Begin:',
@@ -78,6 +83,11 @@ var initialXlatTables = {
 		'MESSAGE_DETAILS': 'Mesaj Detaylarına Bak',
 		'DASHBOARD':'Gösterge Paneli',
 		'LOGIN_ERROR': 'Kullanıcı veya şifre hatalı!',
+		'CHECKBYONE_TITLE' : 'Tek Tek E-Posta Doğrulama',
+		'EMAIL_TITLE1': 'E-Posta Adresi Doğrula',
+		'EMAIL_ENTER': 'E-Posta Adresi Gir',
+		'EMAIL_OK': 'Mail adresi doğrulanmıştır.',
+		'EMAIL_ERR': 'Mail adresi doğrulanamamıştır!',
 
 		'RET_PASS' : 'Parola Al',
 		'ENT_EMAIL' : 'Talimatları Almak İçin E-postanızı Girin',

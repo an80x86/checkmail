@@ -1,0 +1,36 @@
+<div class="row-fluid">
+
+  <div class="span5">
+
+    <div class="widget-box">
+		    <div class="widget-header widget-header-small">
+				      <h5 class="lighter">{{ 'CHECKBYONE_TITLE' | xlat }}</h5>
+				</div>
+
+				<div class="widget-body">
+				      <div class="widget-main">
+							     <form class="form-search" ng-submit="Check()">
+									      <input type="text" ng-model="email" class="input-medium search-query" placeholder="{{ 'EMAIL_ENTER' | xlat }}" required>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-purple btn-small">
+												   {{ 'EMAIL_TITLE1' | xlat }}
+													 <i class="icon-search icon-on-right bigger-110"></i>
+												</button>
+										</form>
+							</div>
+				</div>
+
+        <div id="passwordsNoMatchRegister" ng-show="alert" class="pull-left alert {{alertclass}} inline no-margin" style="margin-top:10px;">
+          <button type="button" class="close" ng-click="gizle()">
+            <i class="icon-remove"></i>
+          </button>
+
+          <i class="{{alerticon}} bigger-120"></i>
+          {{result}}
+        </div>
+
+		</div>
+
+  </div>
+
+</div><!--/row-->
