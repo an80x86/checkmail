@@ -376,8 +376,8 @@
 				//alert($scope.getUser());
 				defaultListController($scope, xlatService);
 			}]);
-			app.controller("CheckmailCtrl", ['$scope', 'xlatService',
-				function ($scope, xlatService) {
+			app.controller("CheckmailCtrl", ['$scope', 'xlatService','$http',
+				function ($scope, xlatService, $http) {
 
 				$scope.gizle = function() {
 					$scope.alert = false;
@@ -388,20 +388,34 @@
 				}
 
 				$scope.Check = function() {
-					if ($scope.email == 'a@a.com') {
-						$scope.alertclass = 'alert-success';
-						var msg = xlatService.xlat('EMAIL_OK', null);
-						$scope.alerticon = 'icon-ok';
-						$scope.result = msg;
-					} else {
-						$scope.alertclass = 'alert-danger';
-						var msg = xlatService.xlat('EMAIL_ERR', null);
-						$scope.alerticon = 'icon-trash';
-						$scope.result = msg;
-					}
-					$scope.goster();
+					$scope.wait = !false;
+					$http({
+        		method : "GET",
+        		url : "system/rest.php?mail="+$scope.email
+    			}).then(function mySuccess(response) {
+						if (response.data.result === "ok" || response.data.result === 1) {
+							$scope.alertclass = 'alert-success';
+							var msg = xlatService.xlat('EMAIL_OK', null) + ' [' + $scope.email+']';
+							$scope.alerticon = 'icon-ok';
+							$scope.result = msg;
+							$scope.email = '';
+							$scope.goster();
+							$scope.wait = false;
+						} else {
+							$scope.alertclass = 'alert-danger';
+							var msg = xlatService.xlat('EMAIL_ERR', null) + ' [' + $scope.email+']';
+							$scope.alerticon = 'icon-trash';
+							$scope.result = msg;
+							$scope.email = '';
+							$scope.goster();
+							$scope.wait = false;
+						}
+    			}, function myError(response) {
+        		alert(response.statusText);
+    			});
 				}
 
+				$scope.wait = false;
 				$scope.result = '';
 				$scope.alert = false;
 				$scope.alertclass = 'alert-success';
