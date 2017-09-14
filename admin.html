@@ -275,11 +275,11 @@
 			app.config(function($routeProvider) {
 			    $routeProvider
 			    .when("/", {
-			        templateUrl : "/screens/admin/dashboard.html",
+			        templateUrl : "screens/admin/dashboard.html",
 							controller : "DashboardCtrl"
 			    })
 					.when("/checkmail", {
-							templateUrl : "/screens/admin/checkmail.html",
+							templateUrl : "screens/admin/checkmail.html",
 							controller : "CheckmailCtrl"
 					});
 			});
@@ -355,8 +355,8 @@
 					{link: '#!', clsname: 'icon-bell-alt', txt: 'Bildirimler'},
 					{link: '#!', clsname: 'icon-envelope', txt: 'Mesajlar'},
 					{link: '#!checkmail', clsname: 'icon-edit', txt: 'Mail Doğrulama'},
-					{link: '#!bulkcheckmail', clsname: 'icon-list-alt', txt: 'Çoklu Mail Doğrulama'},
-					{link: '/logout.html', clsname: 'icon-off', txt: 'Çıkış'},
+					{link: '#!', clsname: 'icon-list-alt', txt: 'Çoklu Mail Doğrulama'},
+					{link: 'logout.html', clsname: 'icon-off', txt: 'Çıkış'},
 				];
 
 				$scope.User = localStorage.userName;
