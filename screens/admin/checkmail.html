@@ -1,7 +1,6 @@
 <div class="row-fluid">
 
   <div class="span5">
-
     <div class="widget-box">
 		    <div class="widget-header widget-header-small">
 				      <h5 class="lighter">{{ 'CHECKBYONE_TITLE' | xlat }}</h5>
@@ -31,7 +30,31 @@
         </div>
 
 		</div>
-
   </div>
+
+  <div class="span5">
+    <div class="widget-box">
+        <div class="widget-header widget-header-small">
+              <h5 class="lighter">{{ 'COUNTER' | xlat }}</h5>
+        </div>
+
+        <div class="widget-body">
+              <div class="widget-main" style="height: 50px;">
+                <div class="span4">
+                  <p><span class="label label-large label-yellow arrowed-in">{{free}}</span></p>
+                </div>
+                <div class="span8">
+                  <div class="progress {{progresCiz(freey)}}" data-percent="{{freey}}%">
+									    <div class="bar" style="width:{{freey}}%;"></div>
+									</div>
+                </div>
+                <p>Api Key : {{key}}</p>
+
+              </div>
+        </div>
+
+    </div>
+  </div>
+
 
 </div><!--/row-->

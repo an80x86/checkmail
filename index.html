@@ -157,20 +157,35 @@
 					defaultListController($scope, xlatService);
 			}]);
 
-			app.controller("loginCtrl", ['$scope', 'xlatService',
-				function ($scope, xlatService) {
-				$scope.Register = function() {
-					if ($scope.userName == "yusufrenault" && $scope.userPassword == "Y2017ullt34") {
-						localStorage.userName = $scope.userName;
-						window.location.href = 'admin.html';
-					} else {
-						var err = xlatService.xlat('LOGIN_ERROR', null);
-						alert(err);
-						if (localStorage.userName) {
-						    localStorage.removeItem("userName");
-						}
-						$scope.userPassword = '';
-					}
+			app.controller("loginCtrl", ['$scope', 'xlatService', '$http',
+				function ($scope, xlatService, $http) {
+
+				$scope.userLogin = function() {
+					var data = {
+						uname: $scope.userName,
+						upass: $scope.userPassword
+					};
+
+					$http.post('system/login', JSON.stringify(data)).then(function (response) {
+								if (response.data == 1 || response.data == '1') {
+									localStorage.userName = $scope.userName;
+									window.location.href = 'admin.html';
+								} else {
+									var err = xlatService.xlat('LOGIN_ERROR', null);
+									alert(err);
+									if (localStorage.userName) {
+									    localStorage.removeItem("userName");
+									}
+									$scope.userPassword = '';
+								}
+						}, function (response) {
+								var err = xlatService.xlat('LOGIN_ERROR', null);
+								alert(err);
+								if (localStorage.userName) {
+							  	localStorage.removeItem("userName");
+								}
+								$scope.userPassword = '';
+					});
 				};
 
 				$scope.userName = "";
