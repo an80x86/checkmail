@@ -67,7 +67,7 @@ Flight::route('/', function(){
     $ret["totals"] = $totals;
     $ret["used"] = $used;
     $ret["free"] = $totals - $used;
-    $ret["freey"] = 100- floor($used * 100 / $totals) ;
+    $ret["freey"] = $totals == 0 ? 0 : 100- floor($used * 100 / $totals);
     $ret["key"] = $key;
 
     echo json_encode($ret);
@@ -121,7 +121,7 @@ Flight::route('/incheck/@mail', function($mail){
     $ret["totals"] = $totals;
     $ret["used"] = $used;
     $ret["free"] = $kalan;
-    $ret["freey"] = 100- floor($used * 100 / $totals) ;
+    $ret["freey"] = $totals == 0 ? 0 : 100- floor($used * 100 / $totals);
     $ret["key"] = $key;
     $ret["email"] = $email;
 
