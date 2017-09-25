@@ -1,0 +1,28 @@
+<div class="row-fluid">
+
+  <div class="span5">
+    <div class="widget-box">
+		    <div class="widget-header widget-header-small">
+				      <h5 class="lighter">{{ 'PASS_C' | xlat }}</h5>
+				</div>
+
+				<div class="widget-body">
+				      <div class="widget-main">
+							     <form class="form-search" ng-submit="Change()">
+                        <input type="text" ng-model="pass" class="input-medium search-query"
+                          placeholder="{{ 'USER_PASSWORD' | xlat }}" maxlength="32" required>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <img ng-show="wait" src="assets/img/reload.gif" alt="wait">
+                        <button ng-show="!wait" type="submit" class="btn btn-purple btn-small">
+												   {{ 'OK_C' | xlat }}
+													 <i class="icon-ok icon-on-right bigger-110"></i>
+												</button>
+										</form>
+							</div>
+				</div>
+
+		</div>
+  </div>
+
+
+</div><!--/row-->

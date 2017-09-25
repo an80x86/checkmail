@@ -13,6 +13,10 @@
 		<link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 
+    <link rel="stylesheet" href="assets/css/datepicker.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="assets/css/daterangepicker.css" />
+
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
@@ -205,7 +209,7 @@
 				<div class="breadcrumbs" id="breadcrumbs">
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">{{CurrentPageTitle}}</a>
+							<span id="title1" style="color:blue;">sss</span>
 						</li>
 					</ul><!--.breadcrumb-->
 
@@ -271,6 +275,9 @@
 		<script src="assets/js/flot/jquery.flot.pie.min.js"></script>
 		<script src="assets/js/flot/jquery.flot.resize.min.js"></script>
 
+		<script src="assets/js/jquery.maskedinput.min.js"></script>
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/jquery.dataTables.bootstrap.js"></script>
 		<!--ace scripts-->
 
 		<script src="assets/js/ace-elements.min.js"></script>
@@ -282,208 +289,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="js/initialXlatTables.js"></script>
-    <script src="js/xlat.js"></script>
+		<script src="js/xlat.js"></script>
 
-		<!--inline scripts related to this page-->
-		<script>
-			var app = angular.module("myApp", ["ngRoute","xlat"]);
-
-			app.config(function($routeProvider) {
-			    $routeProvider
-			    .when("/", {
-			        templateUrl : "screens/admin/dashboard.html",
-							controller : "DashboardCtrl"
-			    })
-					.when("/checkmail", {
-							templateUrl : "screens/admin/checkmail.html",
-							controller : "CheckmailCtrl"
-					});
-			});
-
-			var defaultListController = function ($scope, xlatService, $http) {
-				$scope.setCurrentLanguage = function(language) {
-					xlatService.setCurrentLanguage(language);
-				}
-
-				$scope.progresSts = function (sts) {
-					if (sts <= 25) return 'progress-striped active';
-					if (sts >= 26 && sts <= 50) return 'progress-danger progress-striped active';
-					if (sts >= 51 && sts <= 75) return 'progress-warning progress-striped active';
-					if (sts >= 76 && sts <= 99) return 'progress-success progress-striped active';
-					if (sts >= 100) return 'progress-success';
-
-					return 'progress-danger';
-				}
-
-				$scope.taskLength = function(obj) {
-					var i = 0;
-					obj.forEach(function(element) {
-    				if (element.val<100) i++;
-					});
-
-					return i;
-				}
-
-				$scope.nmLength = function(obj) {
-					var i = 0;
-					obj.forEach(function(element) {
-    				if (element.read === false) i++;
-					});
-
-					return i;
-				}
-
-				// tasks
-				$scope.tasks_list = [
-					{ name: 'migros', val:1 },
-					{ name: 'sok', val:30 },
-					{ name: 'bim', val:60 },
-					{ name: '101', val:95 },
-					{ name: 'gim', val:100 }
-   			];
-				$scope.tasks = $scope.taskLength($scope.tasks_list);
-				$scope.tasks_all = $scope.tasks_list.length;
-
-				// notifications
-				$scope.notifications_list = [
-					{ msg: 'gim listesi işlenmesi bitti', read:false}
-   			];
-				$scope.notifications = $scope.nmLength($scope.notifications_list);
-				$scope.notifications_all = $scope.notifications_list.length;
-
-				// messages
-				$scope.messages_list = [
-					{ frm:'admin', msg: 'merhaba, sistemimize hoş geldiniz.', time:'10.09.2017 10:00', read:true},
-					{ frm:'admin', msg: 'gim toplu mail listesi temizlenmiştir.', time:'13.09.2017 22:00', read:false},
-   			];
-				$scope.messages = $scope.nmLength($scope.messages_list);
-				$scope.messages_all = $scope.messages_list.length;
-
-				// menus
-				$scope.menus_list = [
-					{link: '#!', clsname: 'icon-dashboard', txt: 'Gösterge Paneli'},
-					{link: '#!', clsname: 'icon-tasks', txt: 'Görevler'},
-					{link: '#!', clsname: 'icon-bell-alt', txt: 'Bildirimler'},
-					{link: '#!', clsname: 'icon-envelope', txt: 'Mesajlar'},
-					{link: '#!checkmail', clsname: 'icon-edit', txt: 'Mail Doğrulama'},
-					{link: '#!', clsname: 'icon-list-alt', txt: 'Çoklu Mail Doğrulama'},
-					{link: '#!', clsname: 'icon-tag', txt: 'Şifre Değiştir'},
-					{link: 'logout.html', clsname: 'icon-off', txt: 'Çıkış'},
-				];
-
-				if (!localStorage.userName) {
-						window.location.href = 'index.html';
-						return;
-				}
-				$scope.User = localStorage.userName;
-				$scope.CurrentPageTitle = 'Gösterge Paneli';
-				$scope.setCurrentLanguage('tr');
-			}
-
-			app.controller("myAdmin", ['$scope', 'xlatService',
-				function ($scope, xlatService) {
-
-					defaultListController($scope, xlatService);
-			}]);
-
-			app.controller("DashboardCtrl", ['$scope', 'xlatService',
-				function ($scope, xlatService) {
-
-				//alert($scope.getUser());
-				defaultListController($scope, xlatService);
-			}]);
-			app.controller("CheckmailCtrl", ['$scope', 'xlatService','$http',
-				function ($scope, xlatService, $http) {
-
-				$scope.progresCiz = function (sts) {
-						if (sts <= 25) return 'progress-striped';
-						if (sts >= 26 && sts <= 50) return 'progress-danger';
-						if (sts >= 51 && sts <= 75) return 'progress-warning';
-						if (sts >= 76 && sts <= 99) return 'progress-success';
-						if (sts >= 100) return 'progress-success';
-
-						return 'progress-danger';
-				}
-
-				$scope.gizle = function() {
-					$scope.alert = false;
-				}
-
-				$scope.goster = function() {
-					$scope.alert = true;
-				}
-
-				$scope.Init = function() {
-					$scope.wait = !false;
-					$http({
-        		method : "GET",
-        		url : "system/"
-    			}).then(function mySuccess(response) {
-						$scope.wait = false;
-						var d = response.data;
-						$scope.freey = d.freey;
-						$scope.key = d.key;
-						$scope.free = d.free;
-    			}, function myError(response) {
-						$scope.wait = false;
-        		alert(response.statusText);
-    			});
-				}
-
-				$scope.Check = function() {
-					if ($scope.email==='') return;
-					$scope.wait = !false;
-
-					$http({
-        		method : "GET",
-        		url : "system/incheck/"+$scope.email
-    			}).then(function mySuccess(response) {
-						var d = response.data;
-						$scope.freey = d.freey;
-						$scope.key = d.key;
-						$scope.free = d.free;
-						if (d.sts === "ok") {
-
-							if (response.data.sts2.result === "ok" || response.data.sts2.resultcode === 1) {
-								$scope.alertclass = 'alert-success';
-								var msg = xlatService.xlat('EMAIL_OK', null) + ' [' + $scope.email+']';
-								$scope.alerticon = 'icon-ok';
-								$scope.result = msg;
-								$scope.email = '';
-								$scope.goster();
-								$scope.wait = false;
-							} else {
-								$scope.alertclass = 'alert-danger';
-								var msg = xlatService.xlat('EMAIL_ERR', null) + ' [' + $scope.email+']';
-								$scope.alerticon = 'icon-trash';
-								$scope.result = msg;
-								$scope.email = '';
-								$scope.goster();
-								$scope.wait = false;
-							}
-							$scope.Init();
-						} else {
-							$scope.result = d.sts; // no credit der!..
-							$scope.email = '';
-							$scope.goster();
-							$scope.wait = false;
-						}
-    			}, function myError(response) {
-						$scope.wait = false;
-        		alert(response.statusText);
-    			});
-				}
-
-				$scope.wait = false;
-				$scope.result = '';
-				$scope.alert = false;
-				$scope.alertclass = 'alert-success';
-				$scope.alerticon = 'icon-trash';
-				$scope.Init();
-				defaultListController($scope, xlatService);
-			}]);
-
-			</script>
+		<!-- code -->
+		<script src="js/admin.js"></script>
+		<script src="js/DashboardCtrl.js"></script>
+		<script src="js/CheckmailCtrl.js"></script>
+		<script src="js/LogsCtrl.js"></script>
+		<script src="js/PassCtrl.js"></script>
 
 	</body>
 </html>

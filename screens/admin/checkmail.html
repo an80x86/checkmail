@@ -9,7 +9,8 @@
 				<div class="widget-body">
 				      <div class="widget-main">
 							     <form class="form-search" ng-submit="Check()">
-                        <input type="text" ng-model="email" class="input-medium search-query" placeholder="{{ 'EMAIL_ENTER' | xlat }}" required>
+                        <input type="text" ng-model="email" class="input-medium search-query"
+                        placeholder="{{ 'EMAIL_ENTER' | xlat }}" maxlength="200" required>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <img ng-show="wait" src="assets/img/reload.gif" alt="wait">
                         <button ng-show="!wait" type="submit" class="btn btn-purple btn-small">

@@ -39,6 +39,9 @@ var initialXlatTables = {
 		'EMAIL_OK': 'Mail address verified.',
 		'EMAIL_ERR': 'Mail address not verified!',
 		'COUNTER': 'Remaining Credit',
+		'PASS_C': 'Change Password',
+		'OK_C': 'Okay',
+		'PASS_CH': 'Changed.',
 
 		'USER_REG' : 'New User Registration',
 		'ENTER_DET' : 'Enter Your Details To Begin:',
@@ -90,6 +93,9 @@ var initialXlatTables = {
 		'EMAIL_OK': 'Mail adresi doğrulanmıştır.',
 		'EMAIL_ERR': 'Mail adresi doğrulanamamıştır!',
 		'COUNTER': 'Kalan Kontör',
+		'PASS_C': 'Şifre Değiştir',
+		'OK_C': 'Tamam',
+		'PASS_CH': 'Değiştirildi.',
 
 		'RET_PASS' : 'Parola Al',
 		'ENT_EMAIL' : 'Talimatları Almak İçin E-postanızı Girin',

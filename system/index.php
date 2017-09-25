@@ -27,6 +27,35 @@ Flight::route('POST /login', function(){
     echo $count;
 });
 
+Flight::route('/logs', function(){
+  $user = ses::get("user");
+  $id = 0;
+  $temp = db::Instance()->query(
+     "SELECT * FROM Users WHERE name = :name", [
+     ":name" => ses::get("user")
+    ]
+  )->fetchAll();
+  if (sizeof($temp)>0) $id = $temp[0]["id"];
+
+  $temp = db::Instance()->query(
+     "SELECT email, result, c_date FROM Logs WHERE user_id = :user_id", [
+     ":user_id" => $id
+    ]
+  )->fetchAll();
+
+  $data = array();
+  foreach ($temp as $value){
+    $data[] = array("email"=>$value["email"],"result"=>$value["result"],"c_date"=>$value["c_date"]);
+  }
+
+  $results = ["sEcho" => 1,
+        	"iTotalRecords" => count($data),
+        	"iTotalDisplayRecords" => count($data),
+        	"aaData" => $data ];
+
+  echo json_encode($results);
+});
+
 Flight::route('/', function(){
     $ret = array();
     $ret["user"] = ses::get("user");
@@ -69,6 +98,34 @@ Flight::route('/', function(){
     $ret["free"] = $totals - $used;
     $ret["freey"] = $totals == 0 ? 0 : 100- floor($used * 100 / $totals);
     $ret["key"] = $key;
+
+    echo json_encode($ret);
+});
+
+Flight::route('/change/@pass', function($pass){
+    $epass = $pass;
+    if (strlen($epass)>32) $epass = substr($epass, 0, 32);
+
+    $ret = array();
+    $ret["user"] = ses::get("user");
+
+    $id = 0;
+    $temp = db::Instance()->query(
+	     "SELECT * FROM Users WHERE name = :name", [
+		   ":name" => ses::get("user")
+	    ]
+    )->fetchAll();
+    if (sizeof($temp)>0) $id = $temp[0]["id"];
+
+    $data = db::Instance()->update("Users", [
+	     "pass" => $epass
+     ], [
+	      ":id" => $id
+    ]);
+
+    // Returns the number of rows affected by the last SQL statement
+    $ret["id"] = $id;
+    $ret["rowcnt"] = $data->rowCount();
 
     echo json_encode($ret);
 });
