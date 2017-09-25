@@ -59,7 +59,7 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.nmLength = function(obj) {
     var i = 0;
     obj.forEach(function(element) {
-      if (element.read === false) i++;
+      if (element.read_ === false) i++;
     });
 
     return i;
@@ -89,11 +89,15 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.tasks_all = $scope.tasks_list.length;
 
   // notifications
-  $scope.notifications_list = [
-    { msg: 'gim listesi işlenmesi bitti', read:false}
-  ];
+  $scope.notifications_list = [];
   $scope.notifications = $scope.nmLength($scope.notifications_list);
   $scope.notifications_all = $scope.notifications_list.length;
+  $.ajax({url:  "system/notifications", success: function(result){
+      var data = JSON.parse(result);
+      $scope.notifications_list = data.aaData;
+      $scope.notifications = $scope.nmLength($scope.notifications_list);
+      $scope.notifications_all = $scope.notifications_list.length;
+  }});
 
   // messages
   $scope.messages_list = [
