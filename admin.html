@@ -99,7 +99,7 @@
 									{{ 'NOTIFICATION_TITLE' | xlat }}
 								</li>
 
-								<li ng-repeat="opt2 in notifications_list" ng-if="opt2.read_ === false">
+								<li ng-repeat="opt2 in notifications_list" ng-if="opt2.read_ === false || opt2.read_ === '0'">
 									<a href="#">
 										<div class="clearfix">
 											<span class="pull-left">
@@ -131,7 +131,7 @@
 									{{ 'MESSAGE_TITLE' | xlat }}
 								</li>
 
-								<li ng-repeat="opt3 in messages_list" ng-if="opt3.read === false">
+								<li ng-repeat="opt3 in messages_list" ng-if="opt3.read_ === false || opt3.read_ === '0'">
 									<a href="#">
 										<img src="assets/avatars/avatar.png" class="msg-photo" alt="avatar" />
 										<span class="msg-body">
@@ -142,7 +142,7 @@
 
 											<span class="msg-time">
 												<i class="icon-time"></i>
-												<span>{{opt3.time}}</span>
+												<span>{{opt3.c_date}}</span>
 											</span>
 										</span>
 									</a>

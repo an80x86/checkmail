@@ -59,7 +59,7 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.nmLength = function(obj) {
     var i = 0;
     obj.forEach(function(element) {
-      if (element.read_ === false) i++;
+      if (element.read_ === false || element.read_ == '0') i++;
     });
 
     return i;
@@ -100,12 +100,15 @@ var defaultListController = function ($scope, xlatService, param) {
   }});
 
   // messages
-  $scope.messages_list = [
-    { frm:'admin', msg: 'merhaba, sistemimize hoş geldiniz.', time:'10.09.2017 10:00', read:true},
-    { frm:'admin', msg: 'gim toplu mail listesi temizlenmiştir.', time:'13.09.2017 22:00', read:false},
-  ];
+  $scope.messages_list = [];
   $scope.messages = $scope.nmLength($scope.messages_list);
   $scope.messages_all = $scope.messages_list.length;
+  $.ajax({url:  "system/messages", success: function(result){
+      var data = JSON.parse(result);
+      $scope.messages_list = data.aaData;
+      $scope.messages = $scope.nmLength($scope.messages_list);
+      $scope.messages_all = $scope.messages_list.length;
+  }});
 
   // menus
   $scope.menus_list = [
