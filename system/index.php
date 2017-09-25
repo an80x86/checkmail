@@ -130,6 +130,83 @@ Flight::route('/change/@pass', function($pass){
     echo json_encode($ret);
 });
 
+Flight::route('/check/@api/@mail', function($api,$mail){
+    $eapi = $api;
+    if (strlen($eapi)>200) $eapi = substr($eapi, 0, 200);
+
+    $id = '';
+    $key_original = '';
+    $email = $mail;
+    if (strlen($email)>200) $email = substr($email, 0, 200);
+
+    $ret = array();
+    $temp = db::Instance()->query(
+	     "SELECT * FROM Licenses WHERE key_use = :key_use", [
+		   ":key_use" => $eapi
+	    ]
+    )->fetchAll();
+    if (sizeof($temp)>0) {
+      $id = $temp[0]["user_id"];
+      $key_original = $temp[0]["key_original"];
+    }
+
+    if ($id == '') {
+      $ret["err"] = 'key not found!';
+      echo json_encode($ret);
+      return;
+    }
+
+    $totals = 0;
+    $temp = db::Instance()->query(
+	     "SELECT sum(credits) as c FROM Orders WHERE status = 1 and user_id = :user_id", [
+		   ":user_id" => $id
+	    ]
+    )->fetchAll();
+    if (sizeof($temp)>0) $totals = $temp[0]["c"];
+
+    $used = 0;
+    $temp = db::Instance()->query(
+	     "SELECT count(*) as c FROM Logs WHERE user_id = :user_id", [
+		   ":user_id" => $id
+	    ]
+    )->fetchAll();
+    if (sizeof($temp)>0) $used = $temp[0]["c"];
+
+    $kalan = $totals - $used;
+
+    if ($kalan>0) {
+      $ret["sts"] = "ok";
+
+      $base = 'https://api.hubuco.com/api/v3/?api='.$key_original.'&email='.$email;
+
+      $curl = curl_init();
+      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+      curl_setopt($curl, CURLOPT_HEADER, false);
+      curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($curl, CURLOPT_URL, $base);
+      curl_setopt($curl, CURLOPT_REFERER, $base);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+      $str = curl_exec($curl);
+      curl_close($curl);
+
+      $str = str_replace("\n","",$str);
+      $ret["status"] = json_decode($str);
+
+      db::Instance()->insert("Logs", [
+      	"c_date" => date('Y-m-d H:i:s'),
+        "email" => $email,
+        "result" => $str,
+        "user_id" => $id
+      ]);
+    } else {
+      $ret["err"] = 'not credit!';
+      echo json_encode($ret);
+      return;
+    }
+
+    echo json_encode($ret);
+});
+
 Flight::route('/incheck/@mail', function($mail){
     $email = $mail;
     if (strlen($email)>200) $email = substr($email, 0, 200);
