@@ -10,6 +10,10 @@ app.config(function($routeProvider) {
         templateUrl : "screens/admin/checkmail.html",
         controller : "CheckmailCtrl"
     })
+    .when("/api", {
+        templateUrl : "screens/admin/api.html",
+        controller : "ApiCtrl"
+    })
     .when("/logs", {
         templateUrl : "screens/admin/logs.html",
         controller : "LogsCtrl"
@@ -107,7 +111,7 @@ var defaultListController = function ($scope, xlatService, param) {
     {link: '#!', clsname: 'icon-envelope', txt: 'Mesajlar'},
     {link: '#!checkmail', clsname: 'icon-edit', txt: 'Mail Doğrulama'},
     {link: '#!', clsname: 'icon-list-alt', txt: 'Çoklu Mail Doğrulama'},
-    {link: '#!', clsname: 'icon-cog', txt: 'Api'},
+    {link: '#!api', clsname: 'icon-cog', txt: 'Api'},
     {link: '#!logs', clsname: 'icon-picture', txt: 'Log'},
     {link: '#!pass', clsname: 'icon-tag', txt: 'Şifre Değiştir'},
     {link: 'logout.html', clsname: 'icon-off', txt: 'Çıkış'},
