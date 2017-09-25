@@ -78,15 +78,15 @@ var defaultListController = function ($scope, xlatService, param) {
   }
 
   // tasks
-  $scope.tasks_list = [
-    { name: 'migros', val:1 },
-    { name: 'sok', val:30 },
-    { name: 'bim', val:60 },
-    { name: '101', val:95 },
-    { name: 'gim', val:100 }
-  ];
+  $scope.tasks_list = [];
   $scope.tasks = $scope.taskLength($scope.tasks_list);
   $scope.tasks_all = $scope.tasks_list.length;
+  $.ajax({url:  "system/notifications", success: function(result){
+      var data = JSON.parse(result);
+      $scope.tasks_list = data.aaData;
+      $scope.tasks = $scope.nmLength($scope.tasks_list);
+      $scope.tasks_all = $scope.tasks_list.length;
+  }});
 
   // notifications
   $scope.notifications_list = [];

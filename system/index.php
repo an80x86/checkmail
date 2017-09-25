@@ -27,6 +27,40 @@ Flight::route('POST /login', function(){
     echo $count;
 });
 
+Flight::route('/tasks', function(){
+  $user = ses::get("user");
+  $id = 0;
+  $temp = db::Instance()->query(
+     "SELECT * FROM Users WHERE name = :name", [
+     ":name" => ses::get("user")
+    ]
+  )->fetchAll();
+  if (sizeof($temp)>0) $id = $temp[0]["id"];
+
+  $temp = db::Instance()->query(
+     "SELECT id, name, val, c_date FROM Tasks WHERE user_id = :user_id", [
+     ":user_id" => $id
+    ]
+  )->fetchAll();
+
+  $data = array();
+  foreach ($temp as $value){
+    $data[] = array(
+      "id"=>$value["id"],
+      "name"=>$value["name"],
+      "val"=>$value["val"],
+      "c_date"=>$value["c_date"]
+    );
+  }
+
+  $results = ["sEcho" => 1,
+        	"iTotalRecords" => count($data),
+        	"iTotalDisplayRecords" => count($data),
+        	"aaData" => $data ];
+
+  echo json_encode($results);
+});
+
 Flight::route('/messages', function(){
   $user = ses::get("user");
   $id = 0;
