@@ -18,6 +18,18 @@ app.config(function($routeProvider) {
         templateUrl : "screens/admin/logs.html",
         controller : "LogsCtrl"
     })
+    .when("/messages", {
+        templateUrl : "screens/admin/messages.html",
+        controller : "MessagesCtrl"
+    })
+    .when("/notifications", {
+        templateUrl : "screens/admin/notifications.html",
+        controller : "NotificationsCtrl"
+    })
+    .when("/tasks", {
+        templateUrl : "screens/admin/tasks.html",
+        controller : "TasksCtrl"
+    })
     .when("/pass", {
         templateUrl : "screens/admin/pass.html",
         controller : "PassCtrl"
@@ -81,11 +93,13 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.tasks_list = [];
   $scope.tasks = $scope.taskLength($scope.tasks_list);
   $scope.tasks_all = $scope.tasks_list.length;
-  $.ajax({url:  "system/notifications", success: function(result){
-      var data = JSON.parse(result);
-      $scope.tasks_list = data.aaData;
-      $scope.tasks = $scope.nmLength($scope.tasks_list);
-      $scope.tasks_all = $scope.tasks_list.length;
+  $.ajax({url:  "system/tasks", success: function(result){
+      $scope.$apply(function () {
+        var data = JSON.parse(result);
+        $scope.tasks_list = data.aaData;
+        $scope.tasks = $scope.taskLength($scope.tasks_list);
+        $scope.tasks_all = $scope.tasks_list.length;
+      });
   }});
 
   // notifications
@@ -93,10 +107,12 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.notifications = $scope.nmLength($scope.notifications_list);
   $scope.notifications_all = $scope.notifications_list.length;
   $.ajax({url:  "system/notifications", success: function(result){
-      var data = JSON.parse(result);
-      $scope.notifications_list = data.aaData;
-      $scope.notifications = $scope.nmLength($scope.notifications_list);
-      $scope.notifications_all = $scope.notifications_list.length;
+      $scope.$apply(function () {
+        var data = JSON.parse(result);
+        $scope.notifications_list = data.aaData;
+        $scope.notifications = $scope.nmLength($scope.notifications_list);
+        $scope.notifications_all = $scope.notifications_list.length;
+      });
   }});
 
   // messages
@@ -104,18 +120,20 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.messages = $scope.nmLength($scope.messages_list);
   $scope.messages_all = $scope.messages_list.length;
   $.ajax({url:  "system/messages", success: function(result){
-      var data = JSON.parse(result);
-      $scope.messages_list = data.aaData;
-      $scope.messages = $scope.nmLength($scope.messages_list);
-      $scope.messages_all = $scope.messages_list.length;
+      $scope.$apply(function () {
+        var data = JSON.parse(result);
+        $scope.messages_list = data.aaData;
+        $scope.messages = $scope.nmLength($scope.messages_list);
+        $scope.messages_all = $scope.messages_list.length;
+      });
   }});
 
   // menus
   $scope.menus_list = [
     {link: '#!', clsname: 'icon-dashboard', txt: 'Gösterge Paneli'},
-    {link: '#!', clsname: 'icon-tasks', txt: 'Görevler'},
-    {link: '#!', clsname: 'icon-bell-alt', txt: 'Bildirimler'},
-    {link: '#!', clsname: 'icon-envelope', txt: 'Mesajlar'},
+    {link: '#!tasks', clsname: 'icon-tasks', txt: 'Görevler'},
+    {link: '#!notifications', clsname: 'icon-bell-alt', txt: 'Bildirimler'},
+    {link: '#!messages', clsname: 'icon-envelope', txt: 'Mesajlar'},
     {link: '#!checkmail', clsname: 'icon-edit', txt: 'Mail Doğrulama'},
     {link: '#!', clsname: 'icon-list-alt', txt: 'Çoklu Mail Doğrulama'},
     {link: '#!api', clsname: 'icon-cog', txt: 'Api'},
