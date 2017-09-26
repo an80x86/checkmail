@@ -6,6 +6,7 @@ require 'controllers/checkmail.php';
 
 require 'utils/db.php';
 require 'utils/session.php';
+require 'utils/checkHttps.php';
 
 // Using Medoo namespace
 use flight\Engine;
@@ -14,6 +15,7 @@ use controllers\checkmail as cm;
 
 use utils\Db as db;
 use utils\Session as ses;
+use utils\CheckHttps as ch;
 
 Flight::route('POST /login', function(){
     $myArray = (array)Flight::request()->data->getData();
@@ -289,6 +291,7 @@ Flight::route('/check/@api/@mail', function($api,$mail){
       curl_setopt($curl, CURLOPT_URL, $base);
       curl_setopt($curl, CURLOPT_REFERER, $base);
       curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+      curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
       $str = curl_exec($curl);
       curl_close($curl);
 
@@ -374,6 +377,8 @@ Flight::route('/incheck/@mail', function($mail){
       curl_setopt($curl, CURLOPT_URL, $base);
       curl_setopt($curl, CURLOPT_REFERER, $base);
       curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+      curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+
       $str = curl_exec($curl);
       curl_close($curl);
 
