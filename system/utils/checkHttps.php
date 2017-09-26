@@ -2,17 +2,19 @@
 namespace utils;
 
 class CheckHttps {
-    public static function set($key,$value) {
-      $_SESSION[$key] = $value;
-    }
-    public static function get($key) {
-      if(isset($_SESSION[$key])){
-          return $_SESSION[$key];
-      }
-      return "";
-    }
-    public static function kill() {
-      session_unset();
-      session_destroy();
+    public static function read($key_original,$email) {
+      $base = 'https://api.hubuco.com/api/v3/?api='.$key_original.'&email='.$email;
+
+      $curl = curl_init();
+      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+      curl_setopt($curl, CURLOPT_HEADER, false);
+      curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($curl, CURLOPT_URL, $base);
+      curl_setopt($curl, CURLOPT_REFERER, $base);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+      curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+      $str = curl_exec($curl);
+      curl_close($curl);
+      return $str;
     }
 }

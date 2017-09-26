@@ -282,19 +282,8 @@ Flight::route('/check/@api/@mail', function($api,$mail){
     if ($kalan>0) {
       $ret["sts"] = "ok";
 
-      $base = 'https://api.hubuco.com/api/v3/?api='.$key_original.'&email='.$email;
-
-      $curl = curl_init();
-      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-      curl_setopt($curl, CURLOPT_HEADER, false);
-      curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-      curl_setopt($curl, CURLOPT_URL, $base);
-      curl_setopt($curl, CURLOPT_REFERER, $base);
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-      curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-      $str = curl_exec($curl);
-      curl_close($curl);
-
+      //**
+      $str = ch::CheckHttps($key_original,$email);
       $str = str_replace("\n","",$str);
       $ret["status"] = json_decode($str);
 
@@ -368,20 +357,8 @@ Flight::route('/incheck/@mail', function($mail){
     if ($kalan>0) {
       $ret["sts"] = "ok";
 
-      $base = 'https://api.hubuco.com/api/v3/?api='.$key2.'&email='.$email;
-
-      $curl = curl_init();
-      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-      curl_setopt($curl, CURLOPT_HEADER, false);
-      curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-      curl_setopt($curl, CURLOPT_URL, $base);
-      curl_setopt($curl, CURLOPT_REFERER, $base);
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-      curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-
-      $str = curl_exec($curl);
-      curl_close($curl);
-
+      //**
+      $str = ch::CheckHttps($key2,$email);
       $str = str_replace("\n","",$str);
       $ret["sts2"] = json_decode($str);
 
