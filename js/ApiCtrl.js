@@ -16,7 +16,7 @@ app.controller("ApiCtrl", ['$scope', 'xlatService', '$location', '$http',
       var d = response.data;
       $scope.key = d.key;
       $scope.kontor = d.free;
-      $scope.url = "https://checkmail.co/system/check/" + d.key + "/test@test.com";
+      $scope.url = "https://checkmail.co/verify/system/check/" + d.key + "/test@test.com";
     }, function myError(response) {
       alert(response.statusText);
     });
