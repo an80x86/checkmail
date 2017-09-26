@@ -166,7 +166,7 @@
 						upass: $scope.userPassword
 					};
 
-					$http.post('verify/system/login', JSON.stringify(data)).then(function (response) {
+					$http.post('system/login', JSON.stringify(data)).then(function (response) {
 								if (response.data == 1 || response.data == '1') {
 									localStorage.userName = $scope.userName;
 									window.location.href = 'admin.html';

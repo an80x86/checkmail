@@ -6,7 +6,7 @@ app.controller("MessagesCtrl", ['$scope', 'xlatService','$http','$timeout', '$lo
       $('#logs').dataTable({
         "bProcessing": true,
         //"bServerSide": true,
-        "sAjaxSource": "verify/system/notifications",
+        "sAjaxSource": "system/notifications",
         "aoColumns": [
               { mData: 'msg' } ,
               { mData: 'read_' },

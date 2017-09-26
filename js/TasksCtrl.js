@@ -6,7 +6,7 @@ app.controller("TasksCtrl", ['$scope', 'xlatService','$http','$timeout', '$locat
       $('#logs').dataTable({
         "bProcessing": true,
         //"bServerSide": true,
-        "sAjaxSource": "verify/system/tasks",
+        "sAjaxSource": "system/tasks",
         "aoColumns": [
               { mData: 'name' } ,
               { mData: 'val' },

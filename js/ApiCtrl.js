@@ -11,7 +11,7 @@ app.controller("ApiCtrl", ['$scope', 'xlatService', '$location', '$http',
   $scope.Init = function() {
     $http({
       method : "GET",
-      url : "verify/system/"
+      url : "system/"
     }).then(function mySuccess(response) {
       var d = response.data;
       $scope.key = d.key;

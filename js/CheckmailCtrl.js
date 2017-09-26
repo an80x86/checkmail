@@ -23,7 +23,7 @@ app.controller("CheckmailCtrl", ['$scope', 'xlatService','$http', '$location',
     $scope.wait = !false;
     $http({
       method : "GET",
-      url : "verify/system/"
+      url : "system/"
     }).then(function mySuccess(response) {
       $scope.wait = false;
       var d = response.data;
@@ -42,7 +42,7 @@ app.controller("CheckmailCtrl", ['$scope', 'xlatService','$http', '$location',
 
     $http({
       method : "GET",
-      url : "verify/system/incheck/"+$scope.email
+      url : "system/incheck/"+$scope.email
     }).then(function mySuccess(response) {
       var d = response.data;
       $scope.freey = d.freey;

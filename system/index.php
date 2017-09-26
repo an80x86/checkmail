@@ -283,7 +283,7 @@ Flight::route('/check/@api/@mail', function($api,$mail){
       $ret["sts"] = "ok";
 
       //**
-      $str = ch::CheckHttps($key_original,$email);
+      $str = ch::read($key_original,$email);
       $str = str_replace("\n","",$str);
       $ret["status"] = json_decode($str);
 
@@ -358,7 +358,7 @@ Flight::route('/incheck/@mail', function($mail){
       $ret["sts"] = "ok";
 
       //**
-      $str = ch::CheckHttps($key2,$email);
+      $str = ch::read($key2,$email);
       $str = str_replace("\n","",$str);
       $ret["sts2"] = json_decode($str);
 
