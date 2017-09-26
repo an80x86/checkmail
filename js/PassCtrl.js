@@ -7,7 +7,7 @@ app.controller("PassCtrl", ['$scope', 'xlatService','$http', '$location',
 
     $http({
       method : "GET",
-      url : "system/change/"+$scope.pass
+      url : "verify/system/change/"+$scope.pass
     }).then(function mySuccess(response) {
       var d = response.data;
       $scope.wait = false;

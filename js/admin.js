@@ -42,7 +42,7 @@ var defaultListController = function ($scope, xlatService, param) {
   }
 
   $scope.checkServer = function() {
-    $.ajax({url:  "system/", success: function(result){
+    $.ajax({url:  "verify/system/", success: function(result){
         if (JSON.parse(result).id === "0") {
             window.location.href = 'index.html';
         }
@@ -93,7 +93,7 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.tasks_list = [];
   $scope.tasks = $scope.taskLength($scope.tasks_list);
   $scope.tasks_all = $scope.tasks_list.length;
-  $.ajax({url:  "system/tasks", success: function(result){
+  $.ajax({url:  "verify/system/tasks", success: function(result){
       $scope.$apply(function () {
         var data = JSON.parse(result);
         $scope.tasks_list = data.aaData;
@@ -106,7 +106,7 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.notifications_list = [];
   $scope.notifications = $scope.nmLength($scope.notifications_list);
   $scope.notifications_all = $scope.notifications_list.length;
-  $.ajax({url:  "system/notifications", success: function(result){
+  $.ajax({url:  "verify/system/notifications", success: function(result){
       $scope.$apply(function () {
         var data = JSON.parse(result);
         $scope.notifications_list = data.aaData;
@@ -119,7 +119,7 @@ var defaultListController = function ($scope, xlatService, param) {
   $scope.messages_list = [];
   $scope.messages = $scope.nmLength($scope.messages_list);
   $scope.messages_all = $scope.messages_list.length;
-  $.ajax({url:  "system/messages", success: function(result){
+  $.ajax({url:  "verify/system/messages", success: function(result){
       $scope.$apply(function () {
         var data = JSON.parse(result);
         $scope.messages_list = data.aaData;

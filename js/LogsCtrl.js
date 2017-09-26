@@ -6,7 +6,7 @@ app.controller("LogsCtrl", ['$scope', 'xlatService','$http','$timeout', '$locati
       $('#logs').dataTable({
         "bProcessing": true,
         //"bServerSide": true,
-        "sAjaxSource": "system/logs",
+        "sAjaxSource": "verify/system/logs",
         "aoColumns": [
               { mData: 'email' } ,
               { mData: 'result' },
